@@ -1,0 +1,28 @@
+services:
+  #node-exporter:
+  node-exporter-local:
+    image: quay.io/prometheus/node-exporter
+    stdin_open: true
+    volumes:
+      - /:/host:ro,rslave
+    tty: true
+    ports:
+      - 9100:9100/tcp
+    restart: always
+    command:
+      - --path.rootfs=/host
+
+  #prometheus:
+  prometheus-local:
+    image: prom/prometheus
+    stdin_open: true
+    tty: true
+    ports:
+      - 9090:9090/tcp
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+

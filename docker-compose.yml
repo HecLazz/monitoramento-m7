@@ -6,8 +6,6 @@ services:
     volumes:
       - /:/host:ro,rslave
     tty: true
-    ports:
-      - 9100:9100/tcp
     restart: always
     command:
       - --path.rootfs=/host
@@ -19,8 +17,6 @@ services:
     tty: true
     networks:
       - monitoring
-    ports:
-      - 9090:9090/tcp
     restart: always
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml

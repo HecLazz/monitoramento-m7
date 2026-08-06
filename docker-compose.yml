@@ -17,6 +17,8 @@ services:
     image: prom/prometheus
     stdin_open: true
     tty: true
+    networks:
+      - monitoring
     ports:
       - 9090:9090/tcp
     restart: always
@@ -26,3 +28,6 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
 
+networks:
+  monitoring:
+    external: true
